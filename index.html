@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Managed IT Services NYC | Reliable, Fast & Secure</title>
+  <meta name="description" content="Managed IT services in New York City: 24/7 support, cybersecurity, cloud, and network management for SMBs and enterprises." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;          /* page background */
+      --panel:#121a2b;       /* card background */
+      --panel-2:#0e1626;     /* alt card */
+      --text:#e7eefc;        /* main text */
+      --muted:#9fb0d0;       /* secondary text */
+      --brand:#4fd1c5;       /* teal */
+      --brand-2:#7c5cff;     /* purple */
+      --accent:#15b2ff;      /* blue */
+      --warning:#f59e0b;
+      --ok:#22c55e;
+      --danger:#ef4444;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --max:1200px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#f7f9ff;--panel:#ffffff;--panel-2:#f2f5ff;--text:#0b1220;--muted:#42506a}
+      body{background-image: radial-gradient(600px 200px at 10% 0%, #eaf1ff, transparent 60%),
+                               radial-gradient(600px 200px at 90% -10%, #f0eaff, transparent 60%);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:100%;max-width:var(--max);margin-inline:auto;padding:0 20px}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(11,18,32,.9), rgba(11,18,32,.65));backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.2px}
+    .logo i{width:36px;height:36px;border-radius:10px;background:conic-gradient(from 140deg,var(--brand),var(--accent),var(--brand-2),var(--brand));box-shadow:0 0 0 2px rgba(255,255,255,.06) inset}
+    nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--muted);font-weight:600}
+    nav a:hover{color:var(--text)}
+    .cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--brand),var(--accent));color:#07131b;border:none;border-radius:999px;padding:10px 16px;font-weight:700;box-shadow:var(--shadow);}
+    .cta:focus-visible{outline:3px solid var(--brand)}
+
+    /* Mobile nav */
+    #menu-toggle{display:none}
+    .hamburger{display:none;cursor:pointer;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0}
+    @media (max-width:860px){
+      nav ul{display:none}
+      .hamburger{display:block}
+      #menu-toggle:checked~.sheet{display:block}
+      .sheet{display:none;position:fixed;inset:64px 16px 16px 16px;background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:20px}
+      .sheet ul{display:grid;gap:16px}
+    }
+
+    /* Hero */
+    .hero{position:relative;padding:86px 0 46px;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:-20%;background:radial-gradient(600px 300px at 10% -10%, rgba(79,209,197,.25), transparent 60%),radial-gradient(700px 320px at 90% -20%, rgba(124,92,255,.20), transparent 60%);filter:blur(30px);z-index:-1}
+    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+    .kicker{display:inline-flex;gap:10px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:6px 10px;border-radius:999px;font-weight:700;color:var(--muted)}
+    .kicker i{width:8px;height:8px;border-radius:999px;background:var(--ok)}
+    h1{font-size:clamp(32px,4vw,54px);line-height:1.1;margin:14px 0}
+    .lead{font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:60ch}
+    .hero-cta{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+    .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-weight:700;background:transparent;color:var(--text)}
+
+    .statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+    .stat{background:var(--panel);border:1px solid rgba(255,255,255,.06);padding:16px;border-radius:16px;text-align:center}
+    .stat .num{font-size:22px;font-weight:800}
+    .stat .lbl{color:var(--muted);font-size:13px}
+
+    .visual{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+    .visual .screen{aspect-ratio:16/10;background:radial-gradient(100% 80% at 30% 10%,rgba(21,178,255,.15),transparent 60%),radial-gradient(100% 80% at 90% 0%,rgba(124,92,255,.18),transparent 60%),linear-gradient(180deg,#0d1524,#0b1220);border-radius:14px;border:1px solid rgba(255,255,255,.06);display:grid;place-items:center}
+    .visual svg{max-width:90%;opacity:.9}
+
+    /* Badges */
+    .trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;align-items:center}
+    .badge{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:600}
+
+    /* Sections */
+    section{padding:64px 0}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px}
+    .section-head h2{font-size:clamp(26px,3vw,36px);margin:0}
+    .section-head p{color:var(--muted);max-width:70ch}
+
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width:1000px){.grid.cols-4{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:860px){.hero-grid{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.grid.cols-3{grid-template-columns:1fr}}
+
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:18px}
+    .card h3{margin:6px 0 8px;font-size:18px}
+    .card p{color:var(--muted);font-size:14px}
+    .icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(79,209,197,.15),rgba(124,92,255,.15));border:1px solid rgba(255,255,255,.08)}
+
+    /* Industries */
+    .pill{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px dashed rgba(255,255,255,.18);color:var(--muted);background:rgba(255,255,255,.04);font-weight:600}
+
+    /* Process */
+    .steps{counter-reset:step}
+    .step{position:relative;padding-left:56px}
+    .step:not(:last-child){padding-bottom:18px}
+    .step::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#07131b;font-weight:800;display:grid;place-items:center}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:860px){.pricing{grid-template-columns:1fr}}
+    .price-card{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:20px;position:relative}
+    .ribbon{position:absolute;right:16px;top:16px;background:linear-gradient(90deg,var(--brand),var(--accent));color:#07131b;font-weight:800;border-radius:999px;padding:4px 10px;font-size:12px}
+    .price{font-size:34px;font-weight:800;margin:8px 0}
+    .features{list-style:none;padding:0;margin:14px 0}
+    .features li{display:flex;gap:10px;align-items:flex-start;margin:10px 0;color:var(--muted)}
+    .features svg{flex:0 0 auto}
+
+    /* Testimonials */
+    .quote{font-size:16px;color:var(--muted)}
+    .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+
+    /* Contact */
+    form{display:grid;gap:12px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:560px){.row{grid-template-columns:1fr}}
+    input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font:inherit}
+    textarea{min-height:120px}
+    input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);border-color:transparent}
+    .submit{background:linear-gradient(90deg,var(--brand),var(--accent));color:#07131b;font-weight:800;border:none;border-radius:12px;padding:12px 16px}
+
+    /* Footer */
+    footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .footgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:20px}
+    @media (max-width:1000px){.footgrid{grid-template-columns:1fr 1fr}}
+    @media (max-width:560px){.footgrid{grid-template-columns:1fr}}
+    .footgrid h4{color:var(--text);margin:8px 0}
+    .footgrid ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+    .credit{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;font-size:13px}
+    .credit small{opacity:.8}
+
+
+
+
+    /* Hide mobile menu on larger screens */
+.sheet {
+  display: none;
+}
+
+/* Show mobile menu only on screens smaller than 768px */
+@media (max-width: 768px) {
+  .sheet {
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Default hidden */
+.sheet {
+  display: none;
+}
+
+/* Mobile styles only */
+@media (max-width: 768px) {
+  .sheet {
+    display: none; /* hidden until opened */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;   /* full width */
+    height: 100vh;  /* full height */
+
+    border-radius: 0 !important; /* remove rounded look */
+    margin: 0 !important;
+    padding: 2rem;
+    box-shadow: none !important;
+    z-index: 1000;
+  }
+
+  /* When opened (toggled with JS) */
+  .sheet.open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sheet ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .sheet ul li {
+    margin: 1.5rem 0;
+  }
+
+  .sheet ul li a {
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: #333;
+  }
+
+
+
+
+
+
+
+  .sheet.open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sheet ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .sheet ul li {
+    margin: 1.5rem 0;
+  }
+
+  .sheet ul li a {
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: #faf9f9;
+  }
+
+  .sheet ul li a.cta {
+    /* color: #fff; */
+    background: #0077ff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+  }
+}
+
+
+
+
+.sheet {
+  display: none;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <!-- <a class="logo" href="#home" aria-label="Managed IT Services NYC home"> -->
+        <i aria-hidden="true"></i>
+        <!-- <span>Managed<span style="color:var(--brand)">IT</span> NYC</span> -->
+         <img style="height: 100px; margin-left: -500px;" src="images/logoacg.png" alt="">
+      </a>
+      <input type="checkbox" id="menu-toggle" aria-label="Open menu"/>
+      <label class="hamburger" for="menu-toggle" aria-hidden="true" tabindex="0">
+        <span></span><span></span><span></span>
+      </label>
+      <nav>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#process">Premium Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact" class="cta">Get a Quote</a></li>
+        </ul>
+      </nav>
+      <div class="sheet" role="dialog" aria-label="Mobile Menu">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact" class="cta">Get a Quote</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker"><i></i> 24/7 Managed IT That Just Works</span>
+        <h1>Fast, Secure & Reliable IT Support for NYC Businesses</h1>
+        <p class="lead">From proactive monitoring and cybersecurity to helpdesk and cloud migrations — our certified team keeps your business online, secure, and ready to scale.</p>
+        <div class="hero-cta">
+          <a class="cta" href="#contact">Get Free Assessment</a>
+          <a class="btn-secondary" href="#services" aria-label="Explore services">Explore Services →</a>
+        </div>
+        <div class="statbar">
+          <div class="stat"><div class="num">15m</div><div class="lbl">Avg. Response</div></div>
+          <div class="stat"><div class="num">99.99%</div><div class="lbl">Uptime Targets</div></div>
+          <div class="stat"><div class="num">400+</div><div class="lbl">NYC Clients</div></div>
+        </div>
+        <div class="trust">
+          <span class="badge">Microsoft Partner</span>
+          <span class="badge">Cisco Certified</span>
+          <span class="badge">SOC 2 Ready</span>
+          <span class="badge">HIPAA / PCI</span>
+        </div>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="screen">
+          <!-- Decorative SVG Mockup -->
+          <svg viewBox="0 0 800 460" role="img" aria-label="Dashboard mockup">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#4fd1c5" stop-opacity=".7"/>
+                <stop offset="1" stop-color="#7c5cff" stop-opacity=".7"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="20" width="760" height="420" rx="16" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.1)"/>
+            <rect x="40" y="50" width="200" height="14" rx="7" fill="url(#g1)"/>
+            <rect x="40" y="80" width="120" height="10" rx="5" fill="rgba(255,255,255,.3)"/>
+            <rect x="40" y="110" width="140" height="10" rx="5" fill="rgba(255,255,255,.2)"/>
+            <rect x="40" y="160" width="720" height="240" rx="12" fill="rgba(255,255,255,.06)"/>
+            <polyline points="60,360 140,300 220,320 300,260 380,280 460,220 540,260 620,190 700,240" fill="none" stroke="url(#g1)" stroke-width="6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+<!-- About Us -->
+<section id="about" style="padding:4rem 1rem; background:#0b1220
+">
+  <div class="container" style="max-width:1200px; margin:0 auto;">
+    <div class="section-head" style="text-align:center; margin-bottom:2rem;">
+      <h2 style="font-size:2.25rem; font-weight:700; color:#0ea5e9; margin-bottom:0.5rem;">
+        About Us
+      </h2>
+      <p style="max-width:700px; margin:0 auto; font-size:1.1rem; line-height:1.6; color:#cfd8dc; text-align: justify">
+        Learn more about who we are and how we support across New York City.
+      </p>
+    </div>
+    <div class="content" style="max-width:900px; margin:0 auto; font-size:1rem; line-height:1.8; color:#ffffff; text-align: justify">
+      <p style="margin-bottom:1.5rem;">
+        Alpha Computer Group's Managed IT Services NYC are the ideal fit for small and mid-sized businesses. It's predictable, flexible, scalable and we include unlimited support. You no longer have to worry about how many hours your IT provider spent fixing a server, network device, telephone, security system, or a computer. Our clients focus on business initiatives and leave the experts at Alpha Computer Group to focus on IT related matters. Alpha Computer Group offers your business the full spectrum of Managed IT Services (MSP) and Network Security, from Computer Support and Firewall Management to Server Administration and Microsoft Exchange Management. As a Managed Services Provider (MSP), Alpha Computer Group provides your business with a 24/7 IT Support Help Desk where you can get computer, telephone, security and network problems solved, outages resolved and emergency service around the clock.
+      </p>
+      <p style="margin-bottom:1.5rem;">
+        Alpha Computer Group provides businesses throughout New York City with a suite of Managed IT Services (ITSM), including: IT Management, Cloud Hosting Services, Network Cabling, IT consulting, Phone Systems, Security Camera Systems, and IT project management. Alpha Computer Group is a local, award winning Managed IT Service Provider (MSP) with over 10 years of experience in the NYC Area. We focus on managing our client's IT infrastructure, regardless of location, on premise, in our data centers or a hybrid architecture, and we free up your IT staff to focus on mission critical applications strategic to your business. We off load the mundane tasks and can supplement or take over help desk services so your company can run 24x7x365 without the day-to-day problems of managing trouble tickets. If your business needs help with a strategic IT project, we offer affordable IT consulting services in the New York Area.
+      </p>
+      <p style="margin-bottom:1.5rem;">
+        We provide outsourced IT services to small business clients in NYC who depend on reliable servers, telephones, security cameras and PCs, but don't want to spend a lot of money to keep it that way. Our outsourced IT support programs are designed to make your IT infrastructure reliable and robust, so you can focus on growing your business. We are the leading provider of IT Outsourcing, Computer Network Services, and IT support in NYC. Our knowledgeable network engineers, combined with our IT best practices, help our clients better utilize their network servers and PC's.
+      </p>
+      <p style="margin-bottom:1.5rem;">
+        We provide NYC Managed IT Services to many of the leading local businesses, including healthcare facilities, law offices, financial services organizations, transportation providers (freight forwarders), manufacturers, retailers, the oil and gas industry. If you depend on Information Technology to achieve your business objectives, Alpha Computer Group can help you.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Managed IT Services</h2>
+        <p>Predictable pricing, proactive monitoring, and expert support tailored to your team and tech stack.</p>
+      </div>
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="icon" aria-hidden="true">🛡️</div>
+          <h3>IT Support NYC</h3>
+          <p style="text-align: justify;">Are you looking for proactive, friendly, and reliable IT support in New York City?
+Since 2004, Alpha Computer Group has delivered responsive, local IT services tailored to businesses of all sizes. Whether partnering with your in-house team or acting as your full outsourced provider, we ensure your systems stay secure, available, and worry-free — all for a predictable monthly fee.
+
+Our certified NYC IT consultants provide 24/7 support, same-day onsite service when needed, and fast remote assistance from anywhere. With deep expertise, proven reliability, and a client-first approach, we keep your business running smoothly so you can focus on growth.</p>
+        </article>
+        <article class="card">
+          <div class="icon">☁️</div>
+          <h3>IT Help Desk Support NYC</h3>
+          <p style="text-align: justify;">Our technical team supports computers, Macs, servers, phone systems, tablets, and mobile devices 24/7 throughout New York City. At Alpha Computer Group, we help organizations enhance service and support levels while cutting overhead costs. Our helpdesk and IT services are fully customized to your needs, whether on-site or remote, providing a single point of contact to troubleshoot, administer, and dispatch IT solutions. By reducing expenses tied to payroll, taxes, and training while increasing service quality and user satisfaction, we minimize downtime and wasted staff hours. With flexible access via smartphone, email, or web portal at any time, we protect, secure, and optimize your business technology every day.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🧰</div>
+          <h3>IT Consulting NYC</h3>
+          <p style="text-align: justify;">We also provide IT Consulting Services and Solutions to companies across NYC and New York. Unlike competitors, our approach focuses on delivering highly specialized engineering expertise to small and medium-sized businesses that may not have the budget or need for a full-time specialist like a network engineer or Microsoft expert. While one-time projects remain an important part of our services, our primary focus is on partnering with mid-sized companies to provide ongoing, on-demand access to enterprise-level engineers. We hire only the highest caliber IT consultants in NYC and ensure they receive continuous training and certification to remain among the most talented and knowledgeable in New York. This commitment to excellence has established Alpha Computer Group as one of the top IT consulting firms in NYC.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🌐</div>
+          <h3>VoIP Phone Systems & Support NYC</h3>
+          <p style="text-align: justify;">Alpha Computer Group’s NYC VoIP business phone systems are flexible, powerful, and cost-effective, giving growing businesses the communication tools they need. With VoIP technology, companies save on long-distance charges and equipment costs while enjoying scalable networks that fit any size operation. Investing in VoIP protects your business from outdated technology and high expenses, while lowering monthly communication costs. Our team provides 24/7 Asterisk PBX support in NYC, helping you connect to SIP trunks, PRI, or Analog lines with ease. We also offer free PBX solutions such as PIAF, Elastix, Trixbox, NEC, SwitchVox, and Panasonic to ensure your system runs smoothly and reliably.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🗄️</div>
+          <h3>Structured Network Cabling NYC</h3>
+          <p style="text-align: justify;">Alpha Computer Group is a leading network cabling and wiring contractor serving commercial and residential clients across NYC and New York. We provide structured network wiring and data cabling such as Cat5, Cat5e, Cat6, Cat6a, Cat7a, and fiber optic installations. Our services also include voice cabling, audio/video wiring, optical fiber setups, patch panel installation, termination, and business phone systems. Recognized as the #1 cabling provider in NYC, we know reliable connectivity is essential for today’s operations. Our engineers design and install custom cabling systems to the highest industry standards and thoroughly test every setup before completion. From simple voice cabling to advanced fiber optic networks, we deliver reliable and cost-effective solutions for both homes and businesses. Our goal is to be your trusted NYC partner for network wiring, cabling, and fiber optic data solutions.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🔄</div>
+          <h3>Security Camera Systems NYC</h3>
+          <p style="text-align: justify;">Alpha Computer Group provides Security Camera Systems and Access Control Systems across New York City, with all work and equipment fully guaranteed. We deliver top-quality surveillance solutions at competitive prices, ensuring you never sacrifice quality for cost. A properly installed and maintained system provides clear, reliable coverage for your business or home. As experienced NYC security camera installers, we handle installation, sales, and service for CCTV, IP, HD, and cloud-based systems. Our team designs and installs complete solutions tailored to your needs, from cost-effective setups to advanced surveillance technology. Recognized as leaders in video surveillance, we provide trusted, cutting-edge security solutions for businesses and residents throughout New York City.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+<!-- Process -->
+<section id="process">
+  <div class="container">
+    <div class="section-head">
+      <h2>Premium Services</h2>
+      <p>Our premium IT solutions deliver reliable, secure, and high-performance technology to keep your business ahead.</p>
+    </div>
+    <div class="grid cols-3 steps">
+      <div class="card step">
+        <h3>Managed IT Services</h3>
+        <p style="text-align: justify;">Alpha Computer Group’s Managed IT Services are designed to keep your business technology running smoothly, securely, and efficiently. Our NYC-based solutions focus on reducing downtime, preventing failures, and providing expert technical support. With 24/7 monitoring, proactive maintenance, patching, and security management, we ensure your network and systems remain operational at all times. Whether you have no internal IT staff, a small in-house team, or a dedicated IT department, our customizable Managed Services packages fit your unique business needs. We also offer IT outsourcing and Virtual CIO/CTO services to provide strategic planning, operational guidance, and cost-effective management. By partnering with Alpha Computer Group, your business benefits from predictable expenses, maximum uptime, and a technology infrastructure that supports growth, innovation, and operational stability.</p>
+      </div>
+      <div class="card step">
+        <h3>Business Phone Systems</h3>
+        <p style="text-align: justify;">Communicate seamlessly with Alpha Computer Group’s business phone system solutions. We provide installation, configuration, and ongoing support for commercial phone systems, including VoIP, PBX, and hybrid configurations. With over a decade of experience serving NYC businesses, our expert technicians deliver advanced features like call forwarding, conferencing, voicemail-to-email, and mobile integration. Our systems allow you to mix VoIP, digital, analog, cloud, and on-premise components to create a unified communication solution that matches your business requirements. Switching to VoIP not only reduces call costs but also gives you access to modern telephony features that enhance efficiency and connectivity.</p>
+      </div>
+      <div class="card step">
+        <h3>Network Cabling Services</h3>
+        <p style="text-align: justify;">Reliable infrastructure is the backbone of every business, and Alpha Computer Group provides certified network and voice cabling solutions for NYC companies. We specialize in structured cabling for voice, data, video, audio, and fiber optics. Using high-quality materials and strict testing standards, our structured cabling services ensure maximum performance and long-term reliability. From designing the network layout to full installation and certification, our technicians work closely with your team to build infrastructure that supports current operations and future growth. Whether you need office wiring, server room setup, or fiber optic connectivity, our solutions are tailored to deliver a stable, high-performance network foundation.</p>
+      </div>
+      <div class="card step">
+        <h3>On-Premise Physical Security</h3>
+        <p style="text-align: justify;">Protect your business with Alpha Computer Group’s Security Camera and Access Control Systems. We provide solutions that include card access, biometric systems, keypads, facial recognition, retinal scanning, and CCTV surveillance. Our expert technicians install, configure, and maintain both analog and IP-based security systems to meet your unique security needs. Remote monitoring allows you to view real-time footage and retrieve historical data whenever necessary, giving you total control over your premises. We also provide alarm monitoring, parking lot security, and door access management. With our systems, you gain peace of mind knowing your assets, employees, and customers are safe and secure.</p>
+      </div>
+      <div class="card step">
+        <h3>Email and Collaboration</h3>
+        <p style="text-align: justify;">Alpha Computer Group, in partnership with Microsoft, delivers full-service solutions for email and business collaboration. We support both on-premise and hosted Exchange Server, Office 365, SharePoint, Lync, and Asterisk PBX integration for NYC businesses. Our services reduce administrative costs, improve system reliability, and streamline communication across teams. We ensure your email systems, collaboration tools, and servers are configured for optimal performance, security, and accessibility. From small businesses to larger organizations, we provide scalable solutions that improve productivity and simplify IT management, while our team offers ongoing support and consulting expertise.</p>
+      </div>
+      <div class="card step">
+        <h3>Backup and Disaster Recovery</h3>
+        <p style="text-align: justify;">Data is the lifeblood of your business, and Alpha Computer Group ensures it’s always protected. Our backup and disaster recovery services provide on-premise and cloud-based solutions to safeguard your critical information. We offer complete hardware and system recovery, secure offsite backups, and business continuity planning. Unlike traditional tape backups, our redundant hard drive systems minimize downtime and ensure data is recoverable within minutes. Whether you need file recovery, server restoration, or a fully managed disaster recovery plan, we help you maintain operational continuity, reduce risk, and protect your business from unexpected disruptions. With Alpha Computer Group, your data is always secure, accessible, and reliable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  <!-- Industries -->
+  <section id="industries">
+    <div class="container">
+      <div class="section-head">
+        <h2>Built for NYC Industries</h2>
+        <p>We understand your compliance, workflows, and urgency. Choose a partner who speaks your language.</p>
+      </div>
+      <div class="grid cols-4">
+        <span class="pill">🏥 Healthcare / HIPAA</span>
+        <span class="pill">💼 Legal / eDiscovery</span>
+        <span class="pill">🏦 Finance / PCI</span>
+        <span class="pill">🏗️ Real Estate</span>
+        <span class="pill">🎨 Creative Agencies</span>
+        <span class="pill">🧪 Biotech</span>
+        <span class="pill">🛍️ Retail</span>
+        <span class="pill">🚚 Logistics</span>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+
+
+
+
+
+
+
+    <section style="padding: 60px 20px; background-color: #0b1220; font-family: Arial, sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    
+    <!-- Section Heading -->
+    <div style="text-align: center; margin-bottom: 50px;">
+      <h2 style="font-size: 36px; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+        24x7 Monitoring & IT Security | 24-7 Network & Security Monitoring | 24-7 Network & Server Monitoring
+      </h2>
+      <p style="color: #d1d5db; max-width: 800px; margin: 0 auto;">
+        Server or Network downtime is not good for business. Your network is the backbone of your company. If your services are reaching a critical stage, our administrators are ready to address the issue before it impacts your business. Alpha Computer Group has made it possible for companies to utilize our monitoring solution to avoid the high costs associated with building and managing a Network Operations Center.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+      
+      <!-- Network & Server Monitoring -->
+      <div style="flex: 1 1 400px; background-color: #1b2433; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); padding: 30px; transition: box-shadow 0.3s;">
+        <h3 style="font-size: 24px; font-weight: 600; color: #ffffff; margin-bottom: 15px;">24-7 Security Monitoring</h3>
+        <p style="color: #d1d5db; margin-bottom: 15px;">
+          Are you positive that your IT infrastructure is protected against potential threats?
+        </p>
+        <p style="color: #d1d5db;">
+          Hackers are working around the clock to find vulnerabilities in your network. IT security threats include malware, corrupted data, and failure to update security patches. Alpha Computer Group monitors your environment 24-7 to ensure your network is safe. We implement a comprehensive and proactive security plan that will eliminate external and internal threats against your organization.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+  
+
+  <!-- Pricing / Plans -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <h2>Simple, Transparent Plans</h2>
+        <p>Per‑user pricing with no surprises. Mix and match services to fit your team.</p>
+      </div>
+      <div class="pricing">
+        <div class="price-card">
+          <h3>Essential</h3>
+          <p class="muted">For small teams getting started</p>
+          <div class="price">$49<span style="font-size:14px;color:var(--muted)">/user/mo</span></div>
+          <ul class="features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              Helpdesk 8×5 & remote support
+            </li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Patch & asset management</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> AV + email security baseline</li>
+          </ul>
+          <a class="cta" href="#contact">Choose Essential</a>
+        </div>
+        <div class="price-card" style="border-color:rgba(124,92,255,.4)">
+          <span class="ribbon">Most Popular</span>
+          <h3>Professional</h3>
+          <p class="muted">For growing teams that need 24/7</p>
+          <div class="price">$79<span style="font-size:14px;color:var(--muted)">/user/mo</span></div>
+          <ul class="features">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 24/7 helpdesk & on‑call</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> EDR + SOC monitoring</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> M365/Azure management</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Quarterly vCIO strategy</li>
+          </ul>
+          <a class="cta" href="#contact">Choose Professional</a>
+        </div>
+        <div class="price-card">
+          <h3>Enterprise</h3>
+          <p class="muted">For advanced security & compliance</p>
+          <div class="price">Custom</div>
+          <ul class="features">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> SIEM/XDR + MDR</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Compliance (HIPAA, PCI, SOC 2)</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> DR testing & BCP workshops</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Dedicated TAM & vCISO</li>
+          </ul>
+          <a class="cta" href="#contact">Talk to Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <h2>Trusted by NYC Teams</h2>
+        <p>Real results from real clients — fewer tickets, faster response, stronger security.</p>
+      </div>
+      <div class="grid cols-3">
+        <figure class="card">
+          <blockquote class="quote">“Uptime improved and tickets dropped by 40% in the first quarter. Their quarterly reviews keep us aligned.”</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:10px;margin-top:12px">
+            <span class="avatar" aria-hidden="true"></span>
+            <div><strong>Alex R.</strong><br><small class="muted">COO, Creative Agency</small></div>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <blockquote class="quote">“Our HIPAA audit went smoothly. The team documented policies, trained staff, and closed gaps fast.”</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:10px;margin-top:12px">
+            <span class="avatar" aria-hidden="true"></span>
+            <div><strong>Dr. Patel</strong><br><small class="muted">Clinic Director</small></div>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <blockquote class="quote">“They migrated us to Microsoft 365 with no downtime and better security controls.”</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:10px;margin-top:12px">
+            <span class="avatar" aria-hidden="true"></span>
+            <div><strong>Sara K.</strong><br><small class="muted">Head of Operations</small></div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Get Your Free IT Assessment</h2>
+        <p>Tell us about your environment and goals. We’ll follow up with a tailored plan and pricing.</p>
+      </div>
+      <div class="grid cols-3">
+        <div class="card" style="grid-column:span 2">
+          <form action="#" method="post" onsubmit="event.preventDefault(); alert('Thanks! We will contact you shortly.');">
+            <div class="row">
+              <div>
+                <label for="name">Full Name</label>
+                <input id="name" name="name" type="text" placeholder="Jane Doe" required>
+              </div>
+              <div>
+                <label for="email">Work Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="(212) 555‑0199">
+              </div>
+              <div>
+                <label for="users">Team Size</label>
+                <select id="users" name="users">
+                  <option value="1-10">1–10</option>
+                  <option value="11-25">11–25</option>
+                  <option value="26-50">26–50</option>
+                  <option value="51-100">51–100</option>
+                  <option value=">100">100+</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="message">What do you need help with?</label>
+              <textarea id="message" name="message" placeholder="Tell us about your environment, challenges, and timelines…" required></textarea>
+            </div>
+            <button class="submit" type="submit">Request Assessment</button>
+            <p class="muted" style="margin:6px 0 0">By submitting, you agree to our <a href="#">Privacy Policy</a>.</p>
+          </form>
+        </div>
+        <aside class="card">
+          <h3>Contact</h3>
+          <p class="muted">Mon–Fri 8am–7pm, 24/7 on‑call</p>
+          <p>📞  (877) 608-8647<br>✉️ hello@manageditnyc.com<br>📍 Manhattan, NY</p>
+          <hr style="border-color:rgba(255,255,255,.08)" />
+          <h3>Why choose us?</h3>
+          <ul class="features">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 15‑minute average response</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Flat, predictable billing</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Dedicated TAM / vCIO</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footgrid">
+        <div>
+          <img style="height: 100px;" src="images/logoacg.png" alt="">
+          
+          <p class="muted" style="max-width:52ch;margin-top:8px">NYC‑based managed service provider delivering secure, reliable IT for small to enterprise teams.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Managed IT</a></li>
+            <li><a href="#services">Cybersecurity</a></li>
+            <li><a href="#services">Cloud</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">SLA</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="credit">
+        <small>© <span id="year"></span> Managed IT NYC. All rights reserved.</small>
+        <small>Made with ❤️ in New York.</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Close mobile sheet on nav click
+    document.querySelectorAll('.sheet a').forEach(a=>a.addEventListener('click',()=>{
+      document.getElementById('menu-toggle').checked=false;
+    }));
+
+
+
+
+const menu = document.querySelector('.sheet');
+const toggleBtn = document.querySelector('.menu-toggle');
+
+toggleBtn.addEventListener('click', () => {
+  menu.classList.toggle('open');
+});
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
